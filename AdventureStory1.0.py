@@ -1,6 +1,4 @@
-# Programmer: Aren Gay
-# Date: 3.15.24
-# Program: Choose Your Own Adventure
+inventory = []
 
 def start_game():
     print("Welcome to the Sci-Fi Adventure Game!")
@@ -22,15 +20,19 @@ def start_game():
 def go_left():
     print("You chose to go left.")
     print("You come across a mysterious alien artifact.")
-    print("Do you want to investigate the artifact or keep going?")
+    print("Do you want to touch it, smash it, or take it?")
 
-    choice = input("Enter 'investigate' to explore the artifact or 'keep going' to continue: ").lower()
+    choice = input("Enter 'touch' to touch the artifact, 'smash' to destroy it, or 'take' to store it in your inventory: ").lower()
 
-    if choice == "investigate":
+    if choice == "touch":
         investigate_artifact()
-    elif choice == "keep going":
-        print("You decide to keep going.")
-        print("You encounter a hostile alien species and narrowly escape.")
+    elif choice == "smash":
+        print("You decided to smash the artifact.")
+        print("It suddenly explodes, killing you instantly.")
+        print("Game Over. You lost!")
+    elif choice == "take":
+        inventory.append("Alien Artifact")
+        print("You've added 'Alien Artifact' to your inventory.")
         start_game()
     else:
         print("Invalid choice. Please try again.")
@@ -69,16 +71,37 @@ def go_straight():
         go_straight()
 
 def investigate_artifact():
-    print("You investigate the alien artifact and activate a teleportation device!")
+    print("You cautiously touch the alien artifact and activate a teleportation device!")
     print("Congratulations! You are teleported to safety.")
 
 def search_ship():
     print("You search the abandoned spaceship and find advanced technology.")
-    print("Congratulations! You win the game.")
+    inventory.append("Advanced Technology")
+    print("You've added 'Advanced Technology' to your inventory.")
+    start_game()
 
 def explore_city():
     print("You explore the futuristic city and meet friendly cyborgs.")
     print("You spend some time gathering information and resources before continuing your adventure.")
     start_game()
 
-start_game()
+def check_inventory():
+    if inventory:
+        print("Inventory:")
+        for item in inventory:
+            print("-", item)
+    else:
+        print("Inventory is empty.")
+
+def main():
+    while True:
+        action = input("What would you like to do? Type 'inventory' to check your inventory or 'start' to begin the game: ").lower()
+        if action == "inventory":
+            check_inventory()
+        elif action == "start":
+            start_game()
+        else:
+            print("Invalid action. Please try again.")
+
+if __name__ == "__main__":
+    main()
