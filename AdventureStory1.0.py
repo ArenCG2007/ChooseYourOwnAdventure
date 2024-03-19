@@ -19,7 +19,7 @@ def explore(direction):
     if direction == "left":
         print("You chose to go left.")
         print("You come across a mysterious alien artifact.")
-        take_artifact("Alien Artifact")
+        take_artifact()
     elif direction == "right":
         print("You chose to go right.")
         print("You come across a dark cave entrance.")
@@ -29,12 +29,19 @@ def explore(direction):
         print("You walk for a while and reach a futuristic city.")
         explore_city()
 
-def take_artifact(item):
-    if item not in inventory:
-        inventory.append(item)
-        print(f"You've added '{item}' to your inventory.")
+def take_artifact():
+    action = input("Do you want to take the artifact, or kick it? (take/kick): ").lower()
+    if action == "take":
+        inventory.append("Alien Artifact")
+        print("You've added 'Alien Artifact' to your inventory.")
+    elif action == "kick":
+        print("You kicked the alien artifact.")
+        print("It explodes, causing a massive blast!")
+        print("Game Over. You lost!")
+        exit()
     else:
-        print("You already have this item.")
+        print("Invalid choice. Please try again.")
+        take_artifact()
 
 def explore_cave():
     print("You enter the dark cave.")
@@ -66,23 +73,18 @@ def explore_city():
 
 def interact_with_cyborgs():
     print("The cyborgs are interested in your Alien Artifact.")
-    action = input("Do you want to trade the Alien Artifact for ship parts, threaten them with the ray gun, or ask for the ray gun? (trade/threaten/ask/ray gun): ").lower()
-    if action == "trade":
+    action = input("Do you want to trade the Alien Artifact for the ray gun? (yes/no): ").lower()
+    if action == "yes":
         if "Alien Artifact" in inventory:
             inventory.remove("Alien Artifact")
-            inventory.append("Ship Parts")
-            print("You've added 'Ship Parts' to your inventory.")
+            inventory.append("Ray Gun")
+            print("You've traded the Alien Artifact for the ray gun.")
         else:
             print("You don't have the Alien Artifact to trade.")
-    elif action == "threaten":
-        if "Ray Gun" in inventory:
-            print("You threaten the cyborgs with the ray gun.")
-            print("The cyborgs, intimidated, offer you ship parts as a bribe.")
-            inventory.append("Ship Parts")
-        else:
-            print("You don't have the ray gun to threaten the cyborgs.")
-    elif action == "ask" or action == "ray gun":
-        take_artifact("Ray Gun")
+    elif action == "no":
+        print("The cyborgs are disappointed but understand your decision.")
+    else:
+        print("Invalid choice. The cyborgs are confused by your response.")
 
 def check_inventory():
     if inventory:
