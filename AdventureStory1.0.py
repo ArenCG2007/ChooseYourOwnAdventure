@@ -64,6 +64,7 @@ def fight_spider():
     else:
         print("You attempt to fight the spider bare-handed, but it overwhelms you.")
         print("Game Over. You lost!")
+        exit()
 
 def explore_city():
     print("You explore the futuristic city and meet friendly cyborgs.")
