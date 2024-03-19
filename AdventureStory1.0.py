@@ -2,7 +2,7 @@ inventory = []
 
 def start_game():
     print("Welcome to SpaceQuest - The Sci-Fi Adventure Game!")
-    print("You find yourself on a distant planet, standing at a crossroad, you have been tasked with finding and killing a beastly monster on this planet.")
+    print("You find yourself on a distant planet, standing at a crossroad.")
     print("You can go left, right, or straight ahead.")
 
     while True:
@@ -17,9 +17,14 @@ def start_game():
 
 def explore(direction):
     if direction == "left":
-        print("You decided to venture left, curious about what lies ahead.")
-        print("After walking for a while, you stumble upon a mysterious glowing artifact resting on the ground.")
-        take_artifact()
+        if "Alien Artifact" in inventory:
+            print("You've already explored this path and taken the alien artifact.")
+            print("There's nothing more to discover here.")
+            start_game()
+        else:
+            print("You chose to go left.")
+            print("You come across a mysterious alien artifact.")
+            take_artifact()
     elif direction == "right":
         print("You chose to go right, drawn by the allure of the unknown.")
         print("As you proceed, the path leads you to a dark cave entrance.")
@@ -80,7 +85,7 @@ def explore_city():
 
 def interact_with_cyborgs():
     print("The cyborgs express interest in the strange artifact you carry.")
-    action = input("Would you consider trading the Alien Artifact for a powerful weapon? (yes/no): ").lower()
+    action = input("Would you consider trading the Alien Artifact for advanced technology? (yes/no): ").lower()
     if action == "yes":
         if "Alien Artifact" in inventory:
             inventory.remove("Alien Artifact")
